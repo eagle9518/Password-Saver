@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block Title %}Password Manager{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base_style.css' %}">
+</head>
+<body>
+{% block body %}
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">Password Manager</a>
+
+            {% if user.is_authenticated %}
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ user.username }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </div>
+            {% else %}
+                <from class="form-inline ml-auto">
+                    <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log in</a>
+                    <a href="{% url 'signup' %}" class="btn btn-primary ml-2">Sign up</a>
+                </from>
+            {% endif %}
+
+        </div>
+    </nav>
+    {% if user.is_authenticated %}
+        <div class="container">
+            <ol class="breadcrumb my-4">
+                {% block breadcrumb %} {% endblock %}
+            </ol>
+            {% block content %}
+            {% endblock %}
+        </div>
+    {% endif %}
+{% endblock %}
+</body>
+</html>
+{% block script %} {% endblock %}
+<script rel="script" src="{% static "js/jquery-3.2.1.min.js" %}"></script>
+<script rel="script" src="{% static "js/popper.min.js" %}"></script>
+<script rel="script" src="{% static "js/bootstrap.min.js" %}"></script>

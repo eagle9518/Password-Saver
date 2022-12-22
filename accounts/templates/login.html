@@ -1,0 +1,25 @@
+{% extends 'base_accounts.html' %}
+
+{% block Title %} Login {% endblock %}
+
+{% block entryType %}
+    <h3 class="card-title">Log in</h3>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% include 'includes/form.html' %}
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+{% endblock %}
+
+{% block entryTypeButton %}
+    Don't have an account <a href="{% url 'signup' %}">Sign Up</a>
+{% endblock %}
+
+{% block forgotPassword %}
+    <div class="text-center py-2">
+        <small>
+            <a href="#" class="text-muted">Forgot my password</a>
+        </small>
+    </div>
+{% endblock %}
+

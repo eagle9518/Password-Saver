@@ -1,0 +1,38 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block Title %} Password Manager {% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Home</a></li>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <a class="btn btn-primary" href="{% url 'new_category' %}">Create Category</a>
+    </div>
+    <br>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Category Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in user.category.all %}
+            <tr id="{{ category.name }}">
+                <td><a href="{% url 'category' category.pk %}">{{ category.name }}</a></td>
+                <td>
+                    <input class="btn btn-danger" id="{{ category.name }}" type="button" value="Remove">
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block script %}
+    <script rel="script" src="{% static 'home.js' %}"></script>
+{% endblock %}
+

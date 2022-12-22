@@ -1,0 +1,41 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block Title %} {{ category.name }} {% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'category' category.pk %}">{{ category.name }}</a></li>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <a class="btn btn-primary" href="{% url 'new_password' category.pk %}">Create Password</a>
+    </div>
+    <br>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Site</th>
+            <th>Username</th>
+            <th>Password</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for site in category.site.all %}
+            <tr id="{{ site.site }}">
+                <td>{{ site.site }}</td>
+                <td>{{ site.username }}</td>
+                <td>{{ site.password }}</td>
+                <td>
+                    <input class="btn btn-danger" id="{{ site.site }}" type="button" value="Remove">
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block script %}
+    <script rel="script" src="{% static "category.js" %}"></script>
+{% endblock %}

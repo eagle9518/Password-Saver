@@ -1,0 +1,18 @@
+{% extends 'template.html' %}
+
+{% block Title %} Create New Category {% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'new_category' %}">New Category</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="mb-4">
+        <form method="post">
+            {% csrf_token %}
+            {% include 'includes/form.html' %}
+            <button type="submit" class="btn btn-primary">Create Category</button>
+        </form>
+    </div>
+{% endblock %}
